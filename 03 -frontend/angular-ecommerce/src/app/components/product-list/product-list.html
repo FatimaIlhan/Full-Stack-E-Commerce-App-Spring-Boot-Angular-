@@ -1,1 +1,34 @@
-<p>product-list works!</p>
+<div class="product-list">
+  <h2>Products</h2>
+
+  <table class="product-table" *ngIf="products && products.length; else noProducts">
+    <thead>
+      <tr>
+         <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+       <td>
+         <img src=" {{ product.imageUrl }}" height="50" > 
+       </td>
+        <td>{{ product.name }}</td>
+        <td class="desc">{{ product.description }}</td>
+        <td>{{ product.unitPrice | currency: 'ZAR':'symbol':'1.2-2' }}</td>
+        <td>
+   
+          <button type="button" (click)="viewProduct(product)">View</button>
+          <button type="button" (click)="addToCart(product)">Add to Cart</button>
+        </td>   
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noProducts>
+    <p>No products available.</p>
+  </ng-template>
+</div>
